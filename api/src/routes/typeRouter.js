@@ -4,7 +4,7 @@ const getTypesApi = require('../controllers/getTypesApi');
 
 
 
-router.get('/types', async (req, res) => {
+router.get('/', async (req, res) => {
 
     try {
         const infoTypes = await getTypesApi()

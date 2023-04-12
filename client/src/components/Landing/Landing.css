@@ -1,0 +1,48 @@
+/* Estilos para el componente Landing */
+
+/* Estilo para el contenedor del componente */
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url("../../images/landing.png");
+    background-position: center center;
+    background-size: cover;
+}
+
+  
+  /* Estilo para el encabezado h1 */
+  .landing-header {
+    font-size: 48px;
+    margin-bottom: 50px;
+    text-align: center;
+    color: #fff; /* Cambiamos el color del texto a blanco */
+    text-shadow: 2px 2px 4px #925a2c; /* Agregamos una sombra con desplazamiento horizontal de 2px, desplazamiento vertical de 2px, tamaño de 4px y color #925a2c */
+  }
+  
+  
+  /* Estilo para el botón de inicio */
+  .landing-button {
+    padding: 10px 20px;
+    font-size: 20px;
+    background-color: #1c4d80; /* Nuevo color de fondo */
+    border: 3px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to bottom right, #ffcc00ee, #94712f);
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 0 0 2px #1c4d80, 0 0 0 4px #fff, 4px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  
+  
+  
+  .landing-button:hover {
+    transform: scale(1.05);
+    background-color: #ff8c00;
+  }
+  

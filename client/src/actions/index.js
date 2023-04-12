@@ -7,7 +7,7 @@ export const getAllPokemons = () => {
         try {
             let response = await axios.get("/pokemons");
                return dispatch({
-                   type: "GET_POKEMONS",
+                   type: "GET_ALL_POKEMONS",
                    payload: response.data
                });    
         } catch (error) {
@@ -35,7 +35,7 @@ export const getAllTypes = () => {
 export const getDetail = (id) => {
     return async(dispatch) => {
         try {
-            let response = await axios.get(`/pokemons/:id${id}`);
+            let response = await axios.get(`/pokemons/${id}`); 
               return dispatch({
                   type: "DETAIL",
                   payload: response.data
@@ -48,43 +48,40 @@ export const getDetail = (id) => {
 
 
 export const newPokemon = async (payload) => {
+    return async(dispatch) => {
     try {
-        let response = await axios.post("/pokemons/newpokemon", payload); // ********** /newpokemon ??
-        return response  
+        let response = await axios.post("/pokemons", payload); 
+        return dispatch({
+            type: "NEW_POKEMON",
+            payload: response
+        })  
     } catch (error) {
         return error
+      }
     }
 };
 
 
 export const filteredPokemonsTypes = (payload) => {
-    try {
         return {
             type: "FILTER_TYPES",
             payload
         }
-    } catch (error) {
-        return error
-    }
 };
 
 
 export const filterCreated = (payload) => {
-    try {
         return {
-            type: "ORDER_AZ",
+            type: "FILTER_CREATED",
             payload
         }
-    } catch (error) {
-        return error
-    }
 };
 
 
 export const searchName = (name) => {
     return async(dispatch) => {
         try {
-            let response = await axios.get(`/pokemons/name?name=${name}`);
+            let response = await axios.get(`/pokemons?name=${name}`);
               return dispatch({
                   type: "SEARCH_NAME",
                   payload: response.data
@@ -95,8 +92,15 @@ export const searchName = (name) => {
     }
 };
 
+export function orderNameAlphabetical(payload) {
+    return {
+        type: 'ORDER_AZ',
+        payload
+    }
+};
 
-export function orderUpFallAttack(payload) {
+
+export function orderByAttack(payload) {
     return {
         type: 'ORDER_ATTACK',
         payload
@@ -104,8 +108,8 @@ export function orderUpFallAttack(payload) {
 }
 
 
-export function clearPage(){
+export function clearFilters(){
     return {
-        type: "CLEAR_PAGE"
+        type: "CLEAR_FILTERS"
     }
 };

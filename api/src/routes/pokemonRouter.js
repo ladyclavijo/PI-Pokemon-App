@@ -9,7 +9,7 @@ const createPokemon  = require('../controllers/createPokemon')
 const { Pokemon } = require('../db'); // importo los modelos de la base de datos
 
 //ruta para busqueda API NAME y DB NAME
-router.get('/pokemons/name', async (req, res) => {
+router.get('/', async (req, res) => {
 
     try {
         const { name } = req.query;
@@ -22,9 +22,10 @@ router.get('/pokemons/name', async (req, res) => {
 
     if (!pokemonByNameApi && !pokemonByNameDb) return res.status(404).send('Name not found') 
 
-        const pokemonName = [...[pokemonByNameDb], ...[pokemonByNameApi]]
-       
-        return res.status(200).send(pokemonName)
+        if (pokemonByNameDb === null) return res.status(200).send([pokemonByNameApi])
+            
+        return res.status(200).send([pokemonByNameDb])
+            
     }
 
     if (!name) { 
@@ -37,7 +38,7 @@ router.get('/pokemons/name', async (req, res) => {
 });
 
 //ruta para busqueda API ID y DB ID
-router.get('/pokemons/:id', async(req, res) => {
+router.get('/:id', async(req, res) => {
     try {
         const { id } = req.params;
     
@@ -62,11 +63,11 @@ router.get('/pokemons/:id', async(req, res) => {
 });
 
 // ruta para crear un pokemon en la BD
-router.post('/pokemons', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const {name, image, type, hp, attack, defense, speed, height, weight} = req.body;
 
-        if(!name || !type || !hp || !attack || !defense || !speed ){
+        if(!name || !type || !hp || !attack || !defense){
           return res.status(404).send('Missing data')
         }
         const newPokemon = await createPokemon(name, image, type, hp, attack, defense, speed, height, weight)
@@ -77,18 +78,18 @@ router.post('/pokemons', async (req, res) => {
     }
 });
 
-// router.delete('/:idPokemon', async (req, res) => {
-//     try {
-//         const {idPokemon} = req.params
-//         console.log(idPokemon + 'estamos con Sebita')
-//         await Pokemon.destroy({where: {id: idPokemon}})
+router.delete('/:idPokemon', async (req, res) => {
+    try {
+        const {idPokemon} = req.params
+        console.log(idPokemon + 'estamos con Sebita')
+        await Pokemon.destroy({where: {id: idPokemon}})
                 
-//         res.status(200).send(`pokemon removed`)
-//     } 
-//     catch (error) {
-//         res.status(404).send(error)
-//     }
-// });
+        res.status(200).send(`pokemon removed`)
+    } 
+    catch (error) {
+        res.status(404).send(error)
+    }
+});
 
 // router.put('/:idPokemon', async (req, res) => {
 //     try {

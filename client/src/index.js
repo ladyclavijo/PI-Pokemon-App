@@ -5,6 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
 import {store} from './store';
+import axios from 'axios';
+
+axios.defaults.baseURL = "http://localhost:3001"; // por defecto para cada llamado me va a tomar como base al localhost que es donde tengo levantado mi servidor
+
 
 ReactDOM.render(
   <Provider store={store}>

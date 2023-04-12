@@ -29,7 +29,7 @@ const pokemonProps = Promise.all(pokemonUrl).then(
           id: e.id,
           name: e.name,
           img: e.sprites.other.dream_world.front_default,
-          type: e.types.map((el) => el.type.name),
+          types: e.types.map((el) => el.type.name),
           hp: e.stats[0].base_stat,
           attack: e.stats[1].base_stat,
           defense: e.stats[2].base_stat,
