@@ -99,8 +99,6 @@ function rootReducer (state= initialState, action) {
 
             }
 
-
-
               
           default:
              return state; // si la acción no es de tipo "ORDER_ATTACK", se devuelve el estado actual sin modificaciones

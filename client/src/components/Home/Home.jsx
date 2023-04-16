@@ -1,13 +1,15 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllPokemons, getAllTypes, filteredPokemonsTypes, filterCreated, orderByAttack, orderNameAlphabetical, clearFilters } from "../../actions";
+import { useState, useEffect } from "react"; // importo los hooks que uso de react
+import { useDispatch, useSelector } from "react-redux"; // importo los hooks de react-redux
+ import { getAllPokemons, getAllTypes, filteredPokemonsTypes, filterCreated, orderByAttack, orderNameAlphabetical, clearFilters } from "../../actions"; // importo las actions que quiero usar en "Home"
 import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
+
+//importo los components necesarios
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import NavBar from "../NavBar/NavBar";
-import { useHistory } from 'react-router-dom';
-
+import SearchBar from "../SearchBar/SearchBar";
 
 
 function Home() {
@@ -88,7 +90,6 @@ function Home() {
                 <NavBar/>
             </div>
         
-        
         <div>
 
             <select onChange={handleSort}>
@@ -111,7 +112,7 @@ function Home() {
             </select>
 
             <select onChange={handleFilterTypes}>
-                <option value= "all">All Types</option>
+                <option value= "all" hidden>All Types</option>
                     {types?.map((t) => (
                         <option key={t.id} value={t.name}>{t.name}</option>
                     ))}
@@ -128,12 +129,19 @@ function Home() {
                 pokemons={pokemons.length}
                 pagination={pagination}
             /> 
-                
+
+        <div>
+            <SearchBar/>
+        </div>
+
+
            {currentPokemons?.map((el) => { // me traigo las props del componente Card, como ya me traje el estado global "allPokemons", lo mapeo y le paso la info que necesito mostrar en la card
+
+           // el img de dónde viene????????????????????
                return (
                    <div>
                    <Link to={`/detail/${el.id}`}>
-                       <Card name={el.name} image={el.img} types={el.types}/> 
+                       <Card name={el.name} image={el.img} types={el.types}/>
                    </Link>
                    </div>
                );
@@ -144,4 +152,5 @@ function Home() {
         </div>
     )
 }
-export default Home // ** cada vez que recargamos, los estados de redux vuelven a cargarse si se tiene un useEffect **
+export default Home
+// ** cada vez que recargamos, los estados de redux vuelven a cargarse si se tiene un useEffect **

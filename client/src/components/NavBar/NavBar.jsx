@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
     return (
         <div>
-            <div>logo</div>
+            {/* <div>logo</div> */}
 
             <div>
             <Link to="/home">
-                <div>Home</div>
+                <div>Home</div> 
             </Link>
 
             <Link to="/newPokemon">
@@ -22,9 +22,6 @@ const NavBar = () => {
             </div>
 
         </div>
-
-
     )
 }
-
 export default NavBar;

@@ -16,7 +16,7 @@ function App() {
         <Route exact path= "/detail/:id" component = {CardDetail}/>
         <Route exact path= "/newPokemon" component = {Form}/>
       </Switch>
-      <h1>Página Pokemon de Lady</h1>
+      {/* <h1>Página Pokemon de Lady</h1> */}
     </div>
     </BrowserRouter>
   );

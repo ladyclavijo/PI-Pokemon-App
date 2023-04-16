@@ -33,7 +33,7 @@ const validate = (input) => {
         
     return errors;
         
-}
+};
 
 
 const Form = () => {
@@ -54,20 +54,21 @@ const Form = () => {
         name: "",
         hp: "",
         image: "",
-        type: [], // ***************** faltan las "" ???
+        type: [],
         attack: "",
         defense: "",
         speed: "",
         height: "",
         weigth: ""
-    })
+    });
 
     const pokemonsCheck = pokemons.map(e => e.name);
 
-    const handleChange = (e) => {
+    const handleChange = (e) => { //cada vez que se ejecute esta funcion, a mi estado input además de lo q tiene, agregale el target value de lo q esté modificando
+        
         setInput({
             ...input,
-            [e.target.name]: e.target.value,
+            [e.target.name]: e.target.value, 
         });
     
     setError(validate({
@@ -77,38 +78,28 @@ const Form = () => {
 
     };
 
-    const handleTypes = (e) => {
-        const selectedType = e.target.value;
-
-        if(!input.types.includes(selectedType)) {
-            setInput({
-                ...input,
-                types: [...input.types, selectedType]
-            })
-
-            setError(validate({
-                ...input,
-                types: [...input.types, selectedType]
-            }, pokemonsCheck));
-        }
-    };
-
-    const handleDelete = (type) => {
+    const handleSelect = (e) => {
         setInput({
             ...input,
-            types: input.types.filter(t => t !== type)
+            types: [...input.type, e.target.value]
+        })
+    };
+
+    const handleDelete = (pokemon) => {
+        setInput({
+            ...input,
+            pokemons: input.pokemons.filter(p => p !== pokemon)
         })
 
         setError(validate({
             ...input,
-            types: input.types.filter(t => t !== type)
+            pokemons: input.pokemons.filter(t => t !== pokemon)
         }, pokemonsCheck));       
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (Object.keys(error).length === 0) {
             dispatch(newPokemon(input));
 
             alert("¡Your Pokemon has been created successfully!")
@@ -116,43 +107,43 @@ const Form = () => {
                 name: "",
                 hp: "",
                 image: "",
-                type: [], // ***************** faltan las "" ???
+                type: [], 
                 attack: "",
                 defense: "",
                 speed: "",
                 height: "",
                 weigth: ""
             })
-            history.push("/home") // --------------- !!!!!!!!!!   
-        } else {
-            alert("Please complete the options")
-        }
-    };
+            history.push("/home")   
+        };
+    
 
-
-    return (
+    //aquí abajo los target value que va agarrando mi funcion "handleChange"
+    return(
 
         <div>
 
-            <h1>Create your Pokemon!</h1>
+            <h1 className="tittle">Create your Pokemon!</h1>
 
-            <div>
-            <label>Name:</label>
-            <input type='text'
-                   value={input.name}
-                   name='name'
-                   autoComplete='off'
-                   placeholder='Enter a name'
-                   onChange={handleChange}/>
+            <div className="container-form">
+                <form onSubmit={handleSubmit}>
+
+            <div className="form-input">
+             <label className="form-label">Name: </label>
+                <input type='text'
+                       value={input.name}
+                       name='name'
+                       autoComplete='off'
+                       placeholder='Enter a name'
+                       onChange={handleChange}/>
                 {
                     error.name && (
-
                         <p>{error.name}</p>
                     )
                 }
             </div>
 
-
+{/* 
             <div>
                 <label>Image:</label>
                 <input
@@ -164,28 +155,28 @@ const Form = () => {
                     onChange={(e) => handleChange(e)}
                   />
             <p>{error.image}</p>
-            </div>
+            </div> */}
 
 
-                <div>
-                <label>HP:</label>
+                <div className="form-input">
+                <label className="form-label">HP:</label>
                 <input value={input.hp}
-                          type="number" 
-                          name='summary'
-                          autoComplete='off'
-                          placeholder='0'
-                          onChange={handleChange}/>
+                       type="number" 
+                       name='summary'
+                       autoComplete='off'
+                       placeholder='0'
+                       onChange={handleChange}/>
               {
                       error.hp && (
                           <p>{error.hp}</p>
                       )
                   }
-            </div>
+                </div>
 
 
             
-            <div>
-                <label>Attack:</label>
+            <div className="form-input">
+                <label className="form-label">Attack:</label>
                 <input
                     type="number"
                     name="attack"
@@ -200,8 +191,9 @@ const Form = () => {
                 }
             </div>
 
-            <div>
-                <label>Defense:</label>
+
+            <div className="form-input">
+                <label className="form-label">Defense:</label>
                 <input
                     type="number"
                     name="defense"
@@ -217,8 +209,8 @@ const Form = () => {
             </div>
 
 
-            <div>
-                <label>Speed:</label>
+            <div className="form-input">
+                <label className="form-label">Speed:</label>
                 <input
                     type="number"
                     name="speed"
@@ -234,8 +226,8 @@ const Form = () => {
             </div>
 
 
-            <div>
-                <label>Height:</label>
+            <div className="form-input">
+                <label className="form-label">Height:</label>
                 <input
                     type="number"
                     name="height"
@@ -251,8 +243,8 @@ const Form = () => {
             </div>
 
 
-            <div>
-                <label>Weight:</label>
+            <div className="form-input">
+                <label className="form-label">Weight:</label>
                 <input
                     type="number"
                     name="weight"
@@ -268,39 +260,31 @@ const Form = () => {
             </div>
 
 
-            <div>
-            {types.map((t, k) => (
-              <div key={k}>
-                <input
-                  type="checkbox"
-                  name={t.name}
-                  key={k}
-                  value={t.name}
-                  onChange={(e) => handleTypes(e)}
-                />
-                <label>{t.name}</label>
-              </div>
+            <div className="form-input">
+                <label className="form-label">Type: </label>
+                <select name= "types" onChange={handleSelect}>
+                    <option hidden value="default">Select a Type</option>
+                {types.map((t) => (
+                    <option value={t.name}>{t.name}</option>
+                ))}
+                </select>
+
+                <div className='types-select'>
+                {input.type.map((type, index) => (
+                 <div className='form-types_delete' key={index}>{type}
+                   <button onClick={() => handleDelete(type)}>x</button>
+                 </div>
             ))}
-          </div>
-          <p>{error.type}</p>
+                </div>               
+            </div>
+          
+            </form>
+          
+            <Link to="/home"><button>Go Home</button></Link>
 
-
-  
-
-
-            <div>
-              <button>Create</button>
             </div>
 
-
-            <div>
-              <Link to="/home"><button>Go Home</button></Link>
-            </div>
-
-
-        </div>
-
-               
+        </div>               
     )
 }
 export default Form;
