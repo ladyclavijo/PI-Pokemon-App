@@ -25,4 +25,4 @@ const findByIdApi = async (id) => {
   };
 
 
-  module.exports = findByIdApi
+  module.exports = findByIdApi;

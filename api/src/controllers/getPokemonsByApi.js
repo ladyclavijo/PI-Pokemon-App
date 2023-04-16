@@ -44,4 +44,4 @@ const pokemonProps = Promise.all(pokemonUrl).then(
   };
 
 
-  module.exports = findAllApi
+  module.exports = findAllApi;

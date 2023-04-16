@@ -34,4 +34,4 @@ const { Type } = require ('../db');
   }
 };
 
-  module.exports = getTypesApi
+  module.exports = getTypesApi;

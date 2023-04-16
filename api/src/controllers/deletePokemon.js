@@ -16,4 +16,4 @@ const deletePokemon = async (id) => {
     }
   };
 
-  module.exports = deletePokemon
+  module.exports = deletePokemon;

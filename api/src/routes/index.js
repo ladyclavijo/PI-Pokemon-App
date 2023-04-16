@@ -16,4 +16,4 @@ router.use('/pokemons', pokemonRoute);
 router.use('/types', typeRoute);
 
 
-module.exports = router; //es el que tiene la responsabilidad de definir las rutas
+module.exports = router; //es el que tiene la responsabilidad de definir las rutas!!!

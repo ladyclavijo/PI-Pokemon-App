@@ -25,4 +25,4 @@ const findByNameDb = async (name) => {
     }
 };
 
-module.exports = findByNameDb
+module.exports = findByNameDb;
