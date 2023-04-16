@@ -20,4 +20,4 @@ const findByIdDb = async (id) => {
   }   
 };
 
-module.exports = findByIdDb;
+module.exports = findByIdDb

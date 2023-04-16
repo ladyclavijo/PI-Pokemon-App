@@ -42,7 +42,7 @@ const createPokemon = async (
 
 };
 
-module.exports = createPokemon;
+module.exports = createPokemon
 
 
 

@@ -20,4 +20,4 @@ const updatePokemon = async (id, { name, hp, type,  attack, defense, height, wei
   };
 
 
-  module.exports = updatePokemon;
+  module.exports = updatePokemon

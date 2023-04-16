@@ -20,7 +20,7 @@ const findAllPokemon = async () => {
         const pokemonsApi = await findAllApi(); 
         const allPokemons = [...pokemons, ...pokemonsApi]
 
-        console.log(allPokemons.length + 'Gracias a Alex estoy mejor!!!')
+        console.log(allPokemons.length + 'Gracias a Alex estoy mejor')
         return allPokemons ;
               
     } catch (error) {

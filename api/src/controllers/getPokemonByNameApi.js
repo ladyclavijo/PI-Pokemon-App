@@ -34,4 +34,4 @@ const findByNameApi = async (name) => {
     }
   };
 
-  module.exports = findByNameApi;
+  module.exports = findByNameApi
