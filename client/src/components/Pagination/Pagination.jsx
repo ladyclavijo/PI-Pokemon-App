@@ -1,6 +1,7 @@
 import React from "react";
 
 
+
 //declaro mi paginado , me traigo "pokemonsPerPage, allPokemons, pagination" del componente "Home"        // declaro un arreglo vacío
 // recorro un arreglo en el que voy a tomar el número q resulta de dividir "allPokemons/pokemonsPerPage" y con ese resultado que genero, lo voy a pushear en mi arreglo vacío "pageNumbers"   
 
@@ -19,7 +20,9 @@ const Pagination = ({ pokemonsPerPage, pokemons, pagination }) => {
 
             return (          
             <li key={number}>
-            <a onClick={() => pagination(number)}>{number}</a>
+            <button onClick={() => pagination(number)}>
+              {number}
+              </button>
             </li>
             )
           })}

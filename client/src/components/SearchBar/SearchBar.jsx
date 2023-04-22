@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { searchName } from "../../actions";
+import { getPokemonName } from "../../actions";
 
 
 export default function SearchBar() {
@@ -16,7 +16,7 @@ export default function SearchBar() {
 
     function handleButton(e) {
         e.preventDefault();
-        const searchPokemon = searchName(name) // name va a ser mi estado local, ahí voy guardando lo que va tipeando el usuario
+        const searchPokemon = getPokemonName(name) // name va a ser mi estado local, ahí voy guardando lo que va tipeando el usuario
         dispatch(searchPokemon)
         setName("")
     }

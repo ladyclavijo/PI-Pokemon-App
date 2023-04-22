@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { getAllPokemons, getAllTypes, newPokemon } from "../../actions";
+import { getAllPokemons, getAllTypes, createPokemon } from "../../actions";
 
 
 const validate = (input) => {
@@ -40,8 +40,8 @@ const Form = () => {
 
     const dispatch = useDispatch();
     const history  = useHistory();
-    const pokemons = useSelector(state => state.pokemons);
-    const types    = useSelector(state => state.types);
+    const pokemons = useSelector(state => state.copyPokemons);
+    const types    = useSelector(state => state.copyTypes); // fijarse en los estados
 
     const [error, setError] = useState({});
 
@@ -100,7 +100,7 @@ const Form = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-            dispatch(newPokemon(input));
+            dispatch(createPokemon(input));
 
             alert("¡Your Pokemon has been created successfully!")
             setInput({
@@ -127,6 +127,7 @@ const Form = () => {
 
             <div className="container-form">
                 <form onSubmit={handleSubmit}>
+                
 
             <div className="form-input">
              <label className="form-label">Name: </label>
@@ -285,6 +286,6 @@ const Form = () => {
             </div>
 
         </div>               
-    )
+)
 }
 export default Form;

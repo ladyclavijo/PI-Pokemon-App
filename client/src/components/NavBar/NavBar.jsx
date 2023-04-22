@@ -1,5 +1,4 @@
 import React from "react";
-import SearchBar from "../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
@@ -8,8 +7,8 @@ const NavBar = () => {
             {/* <div>logo</div> */}
 
             <div>
-            <Link to="/home">
-                <div>Home</div> 
+            <Link to="/">
+                <div>Back</div> 
             </Link>
 
             <Link to="/newPokemon">
@@ -17,10 +16,7 @@ const NavBar = () => {
             </Link>
             </div>
                 
-            <div>
-                <SearchBar/>
-            </div>
-
+           
         </div>
     )
 }

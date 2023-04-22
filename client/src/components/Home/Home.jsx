@@ -1,7 +1,9 @@
+import "./home.css";
+
 import React from "react";
 import { useState, useEffect } from "react"; // importo los hooks que uso de react
 import { useDispatch, useSelector } from "react-redux"; // importo los hooks de react-redux
- import { getAllPokemons, getAllTypes, filteredPokemonsTypes, filterCreated, orderByAttack, orderNameAlphabetical, clearFilters } from "../../actions"; // importo las actions que quiero usar en "Home"
+import { getAllPokemons, getAllTypes, filterByTypes, createPokemon, orderByAttack, orderByName } from "../../actions"; // importo las actions que quiero usar en "Home"
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 
@@ -10,6 +12,7 @@ import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import NavBar from "../NavBar/NavBar";
 import SearchBar from "../SearchBar/SearchBar";
+
 
 
 function Home() {
@@ -42,17 +45,14 @@ function Home() {
    
     useEffect (() => {
         dispatch(getAllPokemons())
-    },[dispatch]);
-
-
-    useEffect (() => {
         dispatch(getAllTypes())
     },[dispatch]);
 
-    
+
+   
     function handleSort(e) {
         e.preventDefault();
-        dispatch(orderNameAlphabetical(e.target.value));
+        dispatch(orderByName(e.target.value));
         setCurrentPage(1)
         setOrder(`Organized ${e.target.value}`) // al estado local que arranca vacío, lo seteo ordenado de tal forma
     }
@@ -66,14 +66,14 @@ function Home() {
 
     function handleFilterTypes(e) {
         e.preventDefault();
-        dispatch(filteredPokemonsTypes(e.target.value));
+        dispatch(filterByTypes(e.target.value));
         setCurrentPage(1)
         setOrder(`Organized ${e.target.value}`)
     }
 
     function handleFilterCreated(e) {
         e.preventDefault();
-        dispatch(filterCreated(e.target.value));
+        dispatch(createPokemon(e.target.value));
         setCurrentPage(1)
         setOrder(`Organized ${e.target.value}`)
     }
@@ -122,6 +122,9 @@ function Home() {
             
         </div>
 
+            <div>
+                <SearchBar/>
+            </div>
 
         <div>
             <Pagination 
@@ -130,18 +133,16 @@ function Home() {
                 pagination={pagination}
             /> 
 
-        <div>
-            <SearchBar/>
-        </div>
 
 
            {currentPokemons?.map((el) => { // me traigo las props del componente Card, como ya me traje el estado global "allPokemons", lo mapeo y le paso la info que necesito mostrar en la card
 
-           // el img de dónde viene????????????????????
+           // el img de dónde viene?? 
+           //al el le aplico la image que viene del back
                return (
                    <div>
                    <Link to={`/detail/${el.id}`}>
-                       <Card name={el.name} image={el.img} types={el.types}/>
+                       <Card name={el.name} image={el.image} types={el.type} attack={el.attack}/> {/*lo paso por props al el*/}
                    </Link>
                    </div>
                );
